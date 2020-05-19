@@ -1,0 +1,31 @@
+import java.util.Scanner;
+import java.util.Stack;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		
+		int N = input.nextInt();
+		
+		int T[] = new int[N+1];
+		int P[] = new int[N+1];
+		int dp[] = new int[N+10];
+		
+		for(int i=1; i<=N; i++) {
+			T[i] = input.nextInt();
+			P[i] = input.nextInt();
+		}
+		
+		for(int i=N; i>=1; i--) {
+			int day = i + T[i];
+			if(day <= N+1) {
+				dp[i] = Math.max(dp[day] + P[i], dp[i+1]);
+			}else {
+				dp[i] = dp[i+1];
+			}
+		}
+		
+		System.out.println(dp[1]);
+	}
+}
