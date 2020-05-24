@@ -1,0 +1,22 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		
+		int n = input.nextInt();
+		int k = input.nextInt();
+		int arr[] = new int[n];
+		int dp[] = new int[k+1];
+		for(int i=0; i<n; i++)
+			arr[i] = input.nextInt();
+		dp[0] = 1;
+		for(int i=0; i<n; i++) {
+			for(int j=arr[i]; j<=k; j++) {
+				dp[j] += dp[j-arr[i]];
+			}
+		}
+		System.out.println(dp[k]);
+	}
+}
