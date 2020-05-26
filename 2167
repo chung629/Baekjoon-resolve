@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		
+		int N = input.nextInt();
+		int M = input.nextInt();
+		int arr[][] = new int[N+1][M+1];
+		for(int i=1; i<=N; i++) {
+			for(int j=1; j<=M; j++)
+				arr[i][j] = input.nextInt();
+		}
+		int K = input.nextInt();
+		int sum[][] = new int[K][4];
+		for(int i=0; i<K; i++)
+			for(int j=0; j<4; j++)
+				sum[i][j] = input.nextInt();
+		
+		for(int i=0; i<K; i++) {
+			int result = 0;	
+			for(int y = sum[i][0]; y <= sum[i][2]; y++) {
+				for(int x = sum[i][1]; x <= sum[i][3]; x++) {
+					result+=arr[y][x];
+				}
+			}
+			System.out.println(result);
+		}
+	}
+}
