@@ -1,0 +1,24 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		
+		int N = input.nextInt();
+		int M = input.nextInt();
+		int arr[][] = new int[N+1][M+1];
+		for(int i=1; i<=N; i++) {
+			for(int j=1; j<=M; j++)
+				arr[i][j] = input.nextInt();
+		}
+		int dp[][] = new int[N+1][M+1];
+		
+		for(int i=1; i<=N; i++) {
+			for(int j=1; j<=M; j++) {
+				dp[i][j] += Math.max(dp[i-1][j], Math.max(dp[i][j-1], dp[i-1][j-1])) + arr[i][j];
+			}
+		}
+		System.out.println(dp[N][M]);
+	}
+}
