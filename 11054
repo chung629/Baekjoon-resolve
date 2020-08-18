@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		
+		int length = input.nextInt();
+		int arr[] = new int[length];
+		int max = 0;
+		int left[] = new int[length];
+		int right[] = new int[length];
+		
+		for(int i=0; i<length; i++) {
+			arr[i] = input.nextInt();
+		}
+		left[0] = 1;	right[length-1] = 1;
+		for(int i=1; i<length; i++) {
+			left[i] = 1;
+			for(int j=0; j<i; j++) {
+				if(arr[j] < arr[i]) {
+					left[i] = Math.max(left[i], left[j] + 1);
+				}
+			}
+		}
+		for(int i=length-2; i>=0; i--) {
+			right[i] = 1;
+			for(int j=length-1; j>i; j--) {
+				if(arr[j] < arr[i]) {
+					right[i] = Math.max(right[i], right[j] + 1);
+				}
+			}
+		}
+		
+		
+		max = left[0] + right[0];
+		for(int i=1; i<length; i++) {
+			if(max < left[i] + right[i])
+				max = left[i] + right[i];
+		}
+		
+		System.out.println(max - 1);
+	}
+}
