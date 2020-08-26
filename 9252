@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		
+		char A[] = input.next().toCharArray();
+		char B[] = input.next().toCharArray();
+		StringBuffer result = new StringBuffer();
+		int x = A.length + 1;
+		int y = B.length + 1;
+		int dp[][] = new int[x][y];
+		
+		for(int i=1; i<x; i++) {
+			for(int j=1; j<y; j++) {
+				if(A[i-1] == B[j-1])
+					dp[i][j] = dp[i-1][j-1] + 1;
+				else
+					dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+			}
+		}
+		System.out.println(dp[x-1][y-1]);
+		
+		x = A.length;
+		y = B.length;
+		while(x != 0 && y != 0) {
+			if(A[x-1] == B[y-1]) {
+				result.append(A[x-1]);
+				x--;y--;
+			}else if(dp[x][y] == dp[x-1][y]) {
+				x--;
+			}
+			else if(dp[x][y] == dp[x][y-1]) {
+				y--;
+			}
+		}
+		System.out.println(result.reverse().toString());
+	}
+}
